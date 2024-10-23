@@ -1,0 +1,61 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Prompt Library</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Prompt Types</h2>
+    <ul class="prompt-type-list" id="promptTypeList">
+      <!-- Dynamically populated list -->
+    </ul>
+    <button class="btn" id="manageSchemasBtn">Manage Schemas</button>
+    <button class="btn" id="addPromptBtn">Add Prompt</button>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Prompts List Section -->
+    <section class="prompts-list-section" id="promptsListSection">
+      <h2>Existing Prompts</h2>
+      <ul id="promptsList" class="prompts-list">
+        <!-- Dynamically populated list of prompts -->
+      </ul>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="formSection" style="display: none;">
+      <h2 id="formSectionTitle">Create Prompt</h2>
+      <form id="dynamicForm">
+        <!-- Dynamically generated form fields -->
+        <button type="submit" class="btn">Save Prompt</button>
+        <button type="button" class="btn btn--secondary" id="cancelFormBtn">Cancel</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Schema Editor Modal -->
+  <div id="schemaEditorModal" class="modal" role="dialog" aria-labelledby="schemaEditorTitle" aria-modal="true">
+    <div class="modal__content">
+      <span id="closeModalBtn" class="modal__close" aria-label="Close">&times;</span>
+      <h2 id="schemaEditorTitle">Edit JSON Schema</h2>
+      <textarea id="schemaEditor" class="schema-editor" rows="20">
+        <!-- JSON schema content will be loaded here -->
+      </textarea>
+      <!-- Error Message Container -->
+      <div id="schemaErrorMsg" class="error-message"></div>
+      <div class="modal-actions">
+        <button id="saveSchemaBtn" class="btn">Save Schema</button>
+        <button id="cancelSchemaBtn" class="btn btn--secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

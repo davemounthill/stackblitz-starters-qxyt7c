@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Obsidian Markdown Manager - Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1 id="noteTitle">Sample Note Title</h1>
+    <div class="action-buttons">
+      <button id="editNoteButton" class="btn secondary">Edit</button>
+      <button id="deleteNoteButton" class="btn danger">Delete</button>
+      <button id="linkNoteButton" class="btn primary">🔗 Link Note</button>
+    </div>
+    <nav id="breadcrumbs" aria-label="Breadcrumb">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Project Plan</a></li>
+        <li aria-current="page">Current Note</li>
+      </ul>
+    </nav>
+    <button id="backButton" class="btn secondary">← Back</button>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <section id="noteContent">
+      <p>This is a sample note content. Users can write in Markdown or plain text.</p>
+    </section>
+
+    <!-- Relationships Section -->
+    <section id="relationshipsSection">
+      <h2>Relationships</h2>
+      <div class="relationships">
+        <div class="relationship-category">
+          <h3>Outgoing Relationships</h3>
+          <ul id="outgoingRelationshipsList">
+            <li>
+              <a href="#" class="linked-note">Note Title A</a> - <span class="relationship-type">References</span>
+              <button class="edit-relationship btn icon-btn">✎</button>
+              <button class="delete-relationship btn icon-btn">🗑️</button>
+            </li>
+            <li>
+              <a href="#" class="linked-note">Note Title B</a> - <span class="relationship-type">Related To</span>
+              <button class="edit-relationship btn icon-btn">✎</button>
+              <button class="delete-relationship btn icon-btn">🗑️</button>
+            </li>
+          </ul>
+        </div>
+        <div class="relationship-category">
+          <h3>Incoming Relationships</h3>
+          <ul id="incomingRelationshipsList">
+            <li>
+              <a href="#" class="linked-note">Note Title C</a> - <span class="relationship-type">Cited By</span>
+              <button class="edit-relationship btn icon-btn">✎</button>
+              <button class="delete-relationship btn icon-btn">🗑️</button>
+            </li>
+            <li>
+              <a href="#" class="linked-note">Note Title D</a> - <span class="relationship-type">Subnote</span>
+              <button class="edit-relationship btn icon-btn">✎</button>
+              <button class="delete-relationship btn icon-btn">🗑️</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Link Note Modal -->
+  <div id="linkNoteModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="linkNoteModalTitle">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="linkNoteModalTitle">Link Note</h2>
+        <button id="closeLinkModal" class="close-button" aria-label="Close Modal">×</button>
+      </header>
+      <div class="modal-body">
+        <form id="linkNoteForm">
+          <div class="form-group">
+            <label for="targetNote">Search Note:</label>
+            <input type="text" id="targetNote" name="targetNote" placeholder="Search for a note..." required>
+            <ul id="noteSearchResults" class="search-results"></ul>
+          </div>
+          <div class="form-group">
+            <label for="relationshipType">Relationship Type:</label>
+            <select id="relationshipType" name="relationshipType" required>
+              <option value="" disabled selected>Select relationship type</option>
+              <option value="References">References</option>
+              <option value="Related To">Related To</option>
+              <option value="Subnote">Subnote</option>
+              <!-- Add more types as needed -->
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancelLink" class="btn secondary">Cancel</button>
+            <button type="submit" class="btn primary">Link</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Relationship Modal -->
+  <div id="editRelationshipModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="editRelationshipModalTitle">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="editRelationshipModalTitle">Edit Relationship</h2>
+        <button id="closeEditModal" class="close-button" aria-label="Close Modal">×</button>
+      </header>
+      <div class="modal-body">
+        <form id="editRelationshipForm">
+          <div class="form-group">
+            <label for="editRelationshipType">Relationship Type:</label>
+            <select id="editRelationshipType" name="editRelationshipType" required>
+              <option value="" disabled>Select relationship type</option>
+              <option value="References">References</option>
+              <option value="Related To">Related To</option>
+              <option value="Subnote">Subnote</option>
+              <!-- Add more types as needed -->
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancelEdit" class="btn secondary">Cancel</button>
+            <button type="submit" class="btn primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="modalOverlay" class="overlay hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

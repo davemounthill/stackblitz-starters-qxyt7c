@@ -1,0 +1,968 @@
+/* src/styles/main.css */
+
+/* ======================================================
+   1. CSS Variables for Theming and Consistency
+   ====================================================== */
+
+   :root {
+    /* Light Mode Color Palette */
+    --color-primary: #4A90E2; /* Primary Blue */
+    --color-secondary: #50E3C2; /* Secondary Teal */
+    --color-danger: #D0021B; /* Red for Danger */
+    --color-warning: #F5A623; /* Orange for Warnings */
+    --color-success: #7ED321; /* Green for Success */
+    --color-background: #F7F7F7; /* Light Gray Background */
+    --color-white: #FFFFFF; /* White */
+    --color-gray-light: #E0E0E0; /* Light Gray */
+    --color-gray: #9B9B9B; /* Medium Gray */
+    --color-gray-dark: #4A4A4A; /* Dark Gray */
+    --color-black: #000000; /* Black */
+  
+    /* Typography */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: 17px; /* Increased from 16px */
+    --font-size-lg: 20px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px; /* For smaller text like tooltips */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+  
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+  
+    /* Borders */
+    --border-radius: 6px; /* Slightly increased for modern look */
+    --border-width: 1px;
+    --border-color: var(--color-gray-light);
+  
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+    /* Dark Mode Color Palette */
+    --color-primary-dark: #1A73E8; /* Darker primary for dark mode */
+    --color-background-dark: #1E1E1E;
+    --color-white-dark: #121212;
+    --color-gray-light-dark: #2C2C2C;
+    --color-gray-dark-dark: #CCCCCC;
+  }
+  
+  /* Dark Mode Variables */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: var(--color-background-dark);
+      --color-white: var(--color-white-dark);
+      --color-gray-light: var(--color-gray-light-dark);
+      --color-gray-dark: var(--color-gray-dark-dark);
+      --color-primary: var(--color-primary-dark);
+      /* Adjust other colors if necessary */
+    }
+  }
+  
+  /* ======================================================
+     2. Global Styles
+     ====================================================== */
+  
+  /* Reset and Base Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    background-color: var(--color-background);
+    color: var(--color-gray-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  
+  /* Utility Classes */
+  .hidden {
+    display: none;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-column {
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    flex-direction: row;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .align-center {
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-1 { margin-top: var(--spacing-xs); }
+  .mt-2 { margin-top: var(--spacing-sm); }
+  .mt-3 { margin-top: var(--spacing-md); }
+  .mt-4 { margin-top: var(--spacing-lg); }
+  
+  .mb-1 { margin-bottom: var(--spacing-xs); }
+  .mb-2 { margin-bottom: var(--spacing-sm); }
+  .mb-3 { margin-bottom: var(--spacing-md); }
+  .mb-4 { margin-bottom: var(--spacing-lg); }
+  
+  .p-1 { padding: var(--spacing-xs); }
+  .p-2 { padding: var(--spacing-sm); }
+  .p-3 { padding: var(--spacing-md); }
+  .p-4 { padding: var(--spacing-lg); }
+  
+  .w-100 { width: 100%; }
+  .w-auto { width: auto; }
+  
+  /* ======================================================
+     3. Header and Navigation
+     ====================================================== */
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .section-header h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-dark);
+  }
+  
+  .action-buttons button {
+    margin-left: var(--spacing-sm);
+  }
+  
+  /* ======================================================
+     4. Buttons
+     ====================================================== */
+  
+  button {
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  button.primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  button.primary:hover {
+    background-color: #3A78C9; /* Pre-calculated darker shade */
+  }
+  
+  button.secondary {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-dark);
+  }
+  
+  button.secondary:hover {
+    background-color: var(--color-gray);
+    color: var(--color-white);
+  }
+  
+  button.danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+  }
+  
+  button.danger:hover {
+    background-color: #A40015; /* Pre-calculated darker shade */
+  }
+  
+  button.disabled,
+  button:disabled {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray);
+    cursor: not-allowed;
+  }
+  
+  button.hidden {
+    display: none;
+  }
+  
+  /* Icon Buttons */
+  button[data-action] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button[data-action].icon-button {
+    padding: var(--spacing-xs);
+    width: 40px; /* Increased size for better touch targets */
+    height: 40px;
+  }
+  
+  button.icon-button:hover {
+    background-color: var(--color-gray-light);
+  }
+  
+  /* ======================================================
+     5. Forms and Inputs
+     ====================================================== */
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-dark);
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-dark);
+    background-color: var(--color-white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input[type="text"]:focus,
+  .form-group input[type="password"]:focus,
+  .form-group input[type="email"]:focus,
+  .form-group input[type="number"]:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+  }
+  
+  .form-group input[type="checkbox"] {
+    margin-right: var(--spacing-sm);
+  }
+  
+  .form-group .metadata-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .form-group .metadata-field input {
+    flex: 1;
+    margin-right: var(--spacing-sm);
+  }
+  
+  .form-group .metadata-field button {
+    padding: var(--spacing-xs);
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-group .metadata-field button:hover {
+    background-color: #A40015; /* Darker shade */
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .form-actions button {
+    margin-left: var(--spacing-sm);
+  }
+  
+  /* ======================================================
+     6. Notes List
+     ====================================================== */
+  
+  .notes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notes-list li {
+    background-color: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .notes-list li:hover {
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .notes-list li .note-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+  
+  .notes-list li .note-actions button {
+    margin-left: var(--spacing-xs);
+  }
+  
+  /* ======================================================
+     7. Pagination Controls
+     ====================================================== */
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--spacing-md);
+  }
+  
+  .pagination-controls button {
+    margin: 0 var(--spacing-xs);
+  }
+  
+  .pagination-controls span {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+  }
+  
+  /* ======================================================
+     8. Note Viewing Section
+     ====================================================== */
+  
+  .note-view-section {
+    padding: var(--spacing-md);
+  }
+  
+  .note-view-section h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .note-content {
+    background-color: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    min-height: 200px;
+    overflow-y: auto;
+    box-shadow: var(--shadow-sm);
+    max-height: 60vh; /* Prevents excessively tall content */
+  }
+  
+  .note-content pre {
+    background-color: var(--color-gray-light);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+  }
+  
+  .note-content code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--color-gray-light);
+    padding: 2px 4px;
+    border-radius: var(--border-radius);
+  }
+  
+  .note-view-section button#editNoteButton {
+    margin-top: var(--spacing-md);
+  }
+  
+  /* ======================================================
+     9. Editor Section
+     ====================================================== */
+  
+  .editor-section {
+    padding: var(--spacing-md);
+  }
+  
+  .editor-section h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .toolbar button {
+    margin-right: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+  }
+  
+  .editor {
+    width: 100%;
+    height: 300px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+    background-color: var(--color-white);
+    overflow-y: auto;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .tag-input-container {
+    margin-top: var(--spacing-md);
+    position: relative;
+  }
+  
+  .tag-input-container label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  .tag-input-container input[type="text"] {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-dark);
+    background-color: var(--color-white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tag-input-container input[type="text"]:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+  }
+  
+  .tag-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .tag-suggestions.hidden {
+    display: none;
+  }
+  
+  .tag-suggestions .suggested-tag {
+    padding: var(--spacing-sm);
+    border-bottom: var(--border-width) solid var(--color-gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tag-suggestions .suggested-tag:last-child {
+    border-bottom: none;
+  }
+  
+  .tag-suggestions .suggested-tag span {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-dark);
+  }
+  
+  .tag-suggestions .suggested-tag button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    margin-left: var(--spacing-xs);
+  }
+  
+  .tag-suggestions .suggested-tag button.accept {
+    color: var(--color-success);
+  }
+  
+  .tag-suggestions .suggested-tag button.reject {
+    color: var(--color-danger);
+  }
+  
+  .tag-suggestions .suggested-tag button.undo {
+    color: var(--color-warning);
+  }
+  
+  .tag-suggestions .suggested-tag .tooltip {
+    margin-left: var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-gray);
+    cursor: help;
+  }
+  
+  /* ======================================================
+     10. Note Detail View Section
+     ====================================================== */
+  
+  .note-detail-view {
+    padding: var(--spacing-md);
+  }
+  
+  .note-detail-view h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  #markdownPreview {
+    background-color: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    overflow-y: auto;
+  }
+  
+  #markdownPreview h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  #previewContent {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-dark);
+  }
+  
+  /* ======================================================
+     11. Modal Styles
+     ====================================================== */
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .modal.hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background-color: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    color: var(--color-gray-dark);
+  }
+  
+  .close-button:hover {
+    color: var(--color-danger);
+  }
+  
+  /* ======================================================
+     12. Toast Notifications
+     ====================================================== */
+  
+  .toast-container {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 200;
+  }
+  
+  .toast {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-dark);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+  }
+  
+  .toast.success {
+    background-color: var(--color-success);
+    color: var(--color-white);
+  }
+  
+  .toast.error {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+  }
+  
+  .toast.warning {
+    background-color: var(--color-warning);
+    color: var(--color-white);
+  }
+  
+  .toast.info {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  .toast.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  /* Adjust toast duration using animation-delay */
+  .toast {
+    animation: fadeOut 5s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+  }
+  
+  /* ======================================================
+     13. Scrollbars Styling (Optional)
+     ====================================================== */
+  
+  .notes-list,
+  .note-content,
+  .editor,
+  #previewContent,
+  .modal-content,
+  .tag-suggestions {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-gray-light);
+  }
+  
+  .notes-list::-webkit-scrollbar,
+  .note-content::-webkit-scrollbar,
+  .editor::-webkit-scrollbar,
+  #previewContent::-webkit-scrollbar,
+  .modal-content::-webkit-scrollbar,
+  .tag-suggestions::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .notes-list::-webkit-scrollbar-track,
+  .note-content::-webkit-scrollbar-track,
+  .editor::-webkit-scrollbar-track,
+  #previewContent::-webkit-scrollbar-track,
+  .modal-content::-webkit-scrollbar-track,
+  .tag-suggestions::-webkit-scrollbar-track {
+    background: var(--color-gray-light);
+    border-radius: var(--border-radius);
+  }
+  
+  .notes-list::-webkit-scrollbar-thumb,
+  .note-content::-webkit-scrollbar-thumb,
+  .editor::-webkit-scrollbar-thumb,
+  #previewContent::-webkit-scrollbar-thumb,
+  .modal-content::-webkit-scrollbar-thumb,
+  .tag-suggestions::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-gray-light);
+  }
+  
+  .notes-list::-webkit-scrollbar-thumb:hover,
+  .note-content::-webkit-scrollbar-thumb:hover,
+  .editor::-webkit-scrollbar-thumb:hover,
+  #previewContent::-webkit-scrollbar-thumb:hover,
+  .modal-content::-webkit-scrollbar-thumb:hover,
+  .tag-suggestions::-webkit-scrollbar-thumb:hover {
+    background-color: #3A78C9; /* Darker shade on hover */
+  }
+  
+  /* ======================================================
+     14. Responsive Design Enhancements
+     ====================================================== */
+  
+  @media (max-width: 768px) {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .action-buttons {
+      margin-top: var(--spacing-sm);
+    }
+  
+    .toolbar {
+      flex-wrap: wrap;
+    }
+  
+    .toolbar button {
+      margin-bottom: var(--spacing-xs);
+    }
+  
+    .pagination-controls {
+      flex-direction: column;
+    }
+  
+    .pagination-controls span {
+      margin: var(--spacing-xs) 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .toolbar button[data-action].icon-button {
+      width: 48px; /* Larger touch targets */
+      height: 48px;
+    }
+  
+    .form-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .form-actions button {
+      width: 100%;
+      margin: var(--spacing-xs) 0;
+    }
+  
+    .pagination-controls {
+      flex-direction: column;
+    }
+  
+    .pagination-controls button {
+      width: 100%;
+      margin: var(--spacing-xs) 0;
+    }
+  
+    .tag-suggestions {
+      max-height: 150px;
+    }
+  }
+  
+  /* ======================================================
+     15. Additional Component Styles
+     ====================================================== */
+  
+  /* Tag Suggestions */
+  .suggested-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+  }
+  
+  .suggested-tags-container .tag {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-dark);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-xs) var(--spacing-xs) 0 0;
+    font-size: var(--font-size-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .suggested-tags-container .tag:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  /* Links List */
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .links-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    border-bottom: var(--border-width) solid var(--color-gray-light);
+  }
+  
+  .links-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .links-list li .link-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+  }
+  
+  .links-list li button {
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    transition: color 0.3s ease;
+  }
+  
+  .links-list li button:hover {
+    color: #A40015; /* Darker shade on hover */
+  }
+  
+  /* ======================================================
+     16. Dark Mode Enhancements
+     ====================================================== */
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--color-background);
+      color: var(--color-gray-dark);
+    }
+  
+    .note-content,
+    .notes-list li,
+    .modal-content,
+    .tag-suggestions,
+    .toast {
+      background-color: var(--color-gray-light-dark);
+      border-color: var(--color-gray-dark-dark);
+    }
+  
+    .toolbar {
+      background-color: var(--color-gray-light-dark);
+      border-color: var(--color-gray-dark-dark);
+    }
+  
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select,
+    .editor,
+    #markdownPreview,
+    #previewContent {
+      background-color: #2C2C2C; /* Darker background for inputs */
+      color: var(--color-gray-dark-dark);
+      border-color: var(--color-gray-dark-dark);
+    }
+  
+    .form-group input[type="text"]:focus,
+    .form-group textarea:focus,
+    .form-group select:focus,
+    .editor:focus {
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2); /* Adjusted for dark mode */
+    }
+  
+    .toast.success {
+      background-color: #4CAF50; /* Adjusted green for dark mode */
+    }
+  
+    .toast.error {
+      background-color: #F44336; /* Adjusted red for dark mode */
+    }
+  
+    .toast.warning {
+      background-color: #FF9800; /* Adjusted orange for dark mode */
+    }
+  
+    .toast.info {
+      background-color: var(--color-primary-dark);
+    }
+  }
+  
+  /* ======================================================
+     17. Animation Enhancements
+     ====================================================== */
+  
+  /* Smooth transitions for UI interactions */
+  button,
+  input,
+  textarea,
+  select {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* ======================================================
+     18. Accessibility Enhancements
+     ====================================================== */
+  
+  /* Focus Styles */
+  button:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  
+  /* High Contrast Mode */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-primary: #0000FF;
+      --color-danger: #FF0000;
+      --color-warning: #FFA500;
+      --color-success: #008000;
+      --color-gray-dark: #000000;
+    }
+  
+    button.primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+  
+    button.danger {
+      background-color: var(--color-danger);
+      color: var(--color-white);
+    }
+  
+    /* Adjust other elements as necessary */
+  }
+  

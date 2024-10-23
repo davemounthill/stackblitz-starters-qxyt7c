@@ -1,0 +1,208 @@
+/* styles.css */
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header Styles */
+.header {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo h1 {
+  margin: 0;
+}
+
+.header__nav .btn {
+  margin-left: 10px;
+}
+
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  float: left;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.prompt-type-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.prompt-type-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.prompt-type-list li:hover {
+  background-color: #e9ecef;
+}
+
+.prompt-type-list li.active {
+  background-color: #ced4da;
+  font-weight: bold;
+}
+
+/* Main Content Styling */
+.main-content {
+  margin-left: 270px; /* Sidebar width + padding */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Prompts List Styling */
+.prompts-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.prompts-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prompts-list li:hover {
+  background-color: #f1f1f1;
+}
+
+.prompts-list li .prompt-title {
+  flex-grow: 1;
+}
+
+.prompt-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.prompt-actions button {
+  padding: 5px 10px;
+}
+
+/* Form Section Styling */
+.form-section {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.input-error {
+  border-color: #f44336;
+}
+
+.field-error {
+  color: #f44336;
+  font-size: 12px;
+  display: none;
+}
+
+.success-message {
+  color: #4CAF50;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Nested Fieldset Styling */
+.nested-fieldset {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.nested-fieldset legend {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+/* Modal Styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal__content {
+  background-color: #fefefe;
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 4px;
+}
+
+.modal__close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal__close:hover,
+.modal__close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mockup Test - Note App</title>
+  <link rel="stylesheet" href="main2.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="section-header">
+    <h2>Notes App</h2>
+    <div class="action-buttons">
+      <button id="createNewNoteButton" class="primary">Create New Note</button>
+      <button class="secondary">Sort</button>
+    </div>
+  </header>
+
+  <!-- Note Browser Section -->
+  <div id="noteBrowserSection" class="note-browser-section">
+    <div class="note-browser-controls">
+      <select id="filterTagSelect">
+        <option value="">All Tags</option>
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+      </select>
+      <select id="filterCategorySelect">
+        <option value="">All Categories</option>
+        <option value="research">Research</option>
+        <option value="tasks">Tasks</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search notes..." />
+      <button id="searchButton" class="primary">Search</button>
+    </div>
+    <ul id="notesList" class="notes-list">
+      <li>
+        <span class="note-title">Meeting Notes</span>
+        <div class="note-actions">
+          <button class="secondary">Edit</button>
+          <button class="danger">Delete</button>
+        </div>
+      </li>
+      <li>
+        <span class="note-title">Personal Journal</span>
+        <div class="note-actions">
+          <button class="secondary">Edit</button>
+          <button class="danger">Delete</button>
+        </div>
+      </li>
+      <li>
+        <span class="note-title">Research Findings</span>
+        <div class="note-actions">
+          <button class="secondary">Edit</button>
+          <button class="danger">Delete</button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button id="prevPageButton">Previous</button>
+      <span id="currentPage">1</span> / <span id="totalPages">3</span>
+      <button id="nextPageButton">Next</button>
+    </div>
+  </div>
+
+  <!-- Note Viewing Section -->
+  <div id="noteViewSection" class="note-view-section hidden">
+    <h2>View Note</h2>
+    <div id="noteContentView" class="note-content">
+      <p>This is an example of a note content. You can view the content here.</p>
+      <pre><code>const example = 'Highlighted code block';</code></pre>
+    </div>
+    <button id="editNoteButton" class="primary">Edit Note</button>
+  </div>
+
+  <!-- Editor Section -->
+  <div id="editorSection" class="editor-section hidden">
+    <h2>Edit Note</h2>
+    <div id="editorToolbar" class="toolbar">
+      <button data-action="bold" class="icon-button">B</button>
+      <button data-action="italic" class="icon-button">I</button>
+      <button data-action="heading" class="icon-button">H</button>
+      <button data-action="link" class="icon-button">🔗</button>
+      <button data-action="image" class="icon-button">🖼️</button>
+      <button data-action="code" class="icon-button">&lt;/&gt;</button>
+      <button data-action="quote" class="icon-button">❝ ❞</button>
+      <button data-action="undo" class="icon-button">↶</button>
+      <button data-action="redo" class="icon-button">↷</button>
+    </div>
+    <div id="editorContent" class="editor" contenteditable="true">
+      <p>Edit your note content here.</p>
+    </div>
+
+    <!-- Tag Input -->
+    <div class="tag-input-container">
+      <label for="tagInput">Tags:</label>
+      <input type="text" id="tagInput" placeholder="Add tags separated by commas" autocomplete="off" />
+      <ul id="tagSuggestions" class="tag-suggestions hidden">
+        <li class="suggested-tag">
+          <span>Research</span>
+          <button class="accept">✔️</button>
+          <button class="reject">❌</button>
+          <span class="tooltip" data-tooltip="Tag relevance: High">i</span>
+        </li>
+        <li class="suggested-tag">
+          <span>Work</span>
+          <button class="accept">✔️</button>
+          <button class="reject">❌</button>
+          <span class="tooltip" data-tooltip="Tag relevance: Medium">i</span>
+        </li>
+      </ul>
+    </div>
+
+    <button id="saveButton" class="primary">Save</button>
+    <div id="editorErrorContainer" class="error"></div>
+  </div>
+
+  <!-- Note Detail View Section -->
+  <div id="noteDetailView" class="note-detail-view hidden">
+    <button id="closeNoteDetailView" class="secondary">Close</button>
+    <h2 id="formTitle">Create New Note</h2>
+    <form id="noteForm">
+      <div class="form-group">
+        <label for="noteTitle">Title</label>
+        <input type="text" id="noteTitle" name="title" required />
+      </div>
+      <div class="form-group">
+        <label for="noteContent">Content (Markdown Supported)</label>
+        <textarea id="noteContent" name="content" rows="10" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="noteTags">Tags (comma-separated)</label>
+        <input type="text" id="noteTags" name="tags" />
+      </div>
+      <div class="form-group">
+        <label for="noteCategories">Categories (comma-separated)</label>
+        <input type="text" id="noteCategories" name="categories" />
+      </div>
+      <div class="form-group">
+        <label for="noteMetadata">Metadata (Key-Value Pairs)</label>
+        <div id="metadataContainer">
+          <div class="metadata-field">
+            <input type="text" class="metadata-key" placeholder="Key" />
+            <input type="text" class="metadata-value" placeholder="Value" />
+            <button type="button" class="danger">Remove</button>
+          </div>
+        </div>
+        <button type="button" id="addMetadataButton" class="secondary">Add Metadata</button>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="primary">Save Note</button>
+        <button type="button" id="deleteNoteButton" class="danger hidden">Delete Note</button>
+      </div>
+    </form>
+    <div id="markdownPreview">
+      <h3>Live Preview</h3>
+      <div id="previewContent">Markdown preview content goes here.</div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container">
+    <div class="toast success">Note saved successfully!</div>
+    <div class="toast error">Error saving the note!</div>
+  </div>
+
+  <!-- Modal Example -->
+  <div class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3>Add Link</h3>
+      <form>
+        <div class="form-group">
+          <label for="targetNoteSelect">Select Target Note</label>
+          <select id="targetNoteSelect">
+            <option value="1">Note 1</option>
+            <option value="2">Note 2</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="relationTypeSelect">Relation Type</label>
+          <select id="relationTypeSelect">
+            <option value="related">Related To</option>
+            <option value="cites">Cites</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="primary">Add Link</button>
+          <button type="button" class="secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+  // Interactivity for the Notes App UI
+
+document.addEventListener('DOMContentLoaded', () => {
+  const noteBrowserSection = document.getElementById('noteBrowserSection');
+  const noteViewSection = document.getElementById('noteViewSection');
+  const editorSection = document.getElementById('editorSection');
+  const modal = document.querySelector('.modal');
+  const closeModalButton = document.querySelector('.modal .close-button');
+
+  // Buttons for switching between modes
+  const createNewNoteButton = document.getElementById('createNewNoteButton');
+  const editNoteButton = document.getElementById('editNoteButton');
+  const saveButton = document.getElementById('saveButton');
+  const notesList = document.getElementById('notesList');
+  
+  let selectedNoteId = null;
+
+  // Containers for links and tags
+  const metadataContainer = document.getElementById('metadataContainer');
+  const addMetadataButton = document.getElementById('addMetadataButton');
+  const tagSuggestions = document.getElementById('tagSuggestions');
+  const tagInput = document.getElementById('tagInput');
+
+  // Event Listener for creating a new note
+  createNewNoteButton.addEventListener('click', () => {
+    switchSection('editorSection');
+    clearEditor();
+  });
+
+  // Event Listener for selecting a note in the browser
+  notesList.addEventListener('click', (e) => {
+    if (e.target.closest('li')) {
+      const noteElement = e.target.closest('li');
+      const noteId = noteElement.dataset.noteId; // Assuming noteId is set in dataset
+      openNoteView(noteId);
+    }
+  });
+
+  // Open Note View Mode
+  function openNoteView(noteId) {
+    selectedNoteId = noteId;
+    // Assuming you fetch note content based on noteId, use mockup for now
+    const noteTitle = noteId === '1' ? 'Meeting Notes' : 'Personal Journal'; 
+    const noteContent = noteId === '1' 
+      ? 'This is the content of Meeting Notes.' 
+      : 'This is the content of Personal Journal.';
+    
+    document.getElementById('noteContentView').innerHTML = `<p>${noteContent}</p>`;
+    switchSection('noteViewSection');
+  }
+
+  // Event Listener for editing a note
+  editNoteButton.addEventListener('click', () => {
+    if (selectedNoteId) {
+      openNoteEditor(selectedNoteId);
+    }
+  });
+
+  // Open Editor Mode
+  function openNoteEditor(noteId) {
+    // Load the note content into the editor for editing (mockup content for now)
+    const noteContent = noteId === '1' 
+      ? 'This is the content of Meeting Notes.' 
+      : 'This is the content of Personal Journal.';
+    
+    document.getElementById('editorContent').innerHTML = `<p>${noteContent}</p>`;
+    switchSection('editorSection');
+  }
+
+  // Function to clear the editor content (when creating a new note)
+  function clearEditor() {
+    document.getElementById('editorContent').innerHTML = '<p></p>';
+  }
+
+  // Function to switch between sections
+  function switchSection(sectionId) {
+    const sections = [noteBrowserSection, noteViewSection, editorSection];
+    sections.forEach((section) => {
+      section.classList.add('hidden');
+    });
+    document.getElementById(sectionId).classList.remove('hidden');
+  }
+
+  // Modal Interactivity
+  closeModalButton.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  // Function to open modal (example usage, e.g., to add a link)
+  function openModal() {
+    modal.classList.remove('hidden');
+  }
+
+  // Example: Automatically show Note Browser on load
+  switchSection('noteBrowserSection');
+
+  // Show/Hide Tag Suggestions Container
+  tagInput.addEventListener('input', () => {
+    const query = tagInput.value.trim();
+    if (query.length > 0) {
+      tagSuggestions.classList.remove('hidden');
+      // Optionally, filter suggestions based on input
+    } else {
+      tagSuggestions.classList.add('hidden');
+    }
+  });
+
+  // Hide tag suggestions when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!tagSuggestions.contains(e.target) && e.target !== tagInput) {
+      tagSuggestions.classList.add('hidden');
+    }
+  });
+
+  // Show/Hide Metadata (Link) Container
+  addMetadataButton.addEventListener('click', () => {
+    const newMetadataField = document.createElement('div');
+    newMetadataField.classList.add('metadata-field');
+    newMetadataField.innerHTML = `
+      <input type="text" class="metadata-key" placeholder="Key" />
+      <input type="text" class="metadata-value" placeholder="Value" />
+      <button type="button" class="danger">Remove</button>
+    `;
+    metadataContainer.appendChild(newMetadataField);
+
+    // Add event listener to remove button
+    const removeButton = newMetadataField.querySelector('.danger');
+    removeButton.addEventListener('click', () => {
+      newMetadataField.remove();
+    });
+  });
+});
+
+  </script>
+</body>
+</html>
